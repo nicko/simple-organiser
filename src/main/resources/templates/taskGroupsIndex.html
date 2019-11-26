@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+        integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{css/main.css}"/>
+  <title>Tasks</title>
+</head>
+<body>
+<h1>Simple Task Manager</h1>
+<div th:if="${errorMessage != null}" class="notification-container failure">
+  <span th:text="${{errorMessage}}"></span>
+</div>
+<div th:if="${message != null}" class="notification-container success">
+  <span th:text="${{message}}"></span>
+</div>
+<div class="container">
+  <div class="column" th:each="col : ${columns}">
+    <div class="column-name" th:text="${{col.name}}"></div>
+    <div>
+      <div class="task-card" th:each="task : ${col.tasks}">
+        <div th:text="${{task.title}}"></div>
+      </div>
+    </div>
+    <div class="column-add-task-form">
+      <form class="pure-form pure-g" action="#" th:action="@{/tasks}" th:object="${taskForm}" method="post">
+        <fieldset>
+          <input type="text" th:field="*{title}" placeholder="Add New Task">
+          <input type="hidden" name="status" th:value="${col.status}"/>
+          <input type="hidden" name="position" th:value="${#lists.size(col.tasks)}"/>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
