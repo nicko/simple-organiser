@@ -28,7 +28,6 @@ background-color: #fff;
     flex-wrap: no-wrap;
     justify-content: space-between;
     align-items: stretch;
-
 }
 
 .column {
@@ -57,4 +56,24 @@ background-color: #fff;
 .column-add-task-form input,
 .column-add-task-form fieldset {
     width: 100%;
+}
+
+.grid-container {
+background-color: #f00;
+}
+
+.grid-container .task-cell {
+    background-color: #ddf;
+    width: 250px;
+    height: 150px;
+    display: block;
+    float: left;
+    margin: 4px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.task-cell h3 {
+
 }

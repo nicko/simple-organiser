@@ -2,12 +2,13 @@ package com.cremaconsulting.simpleorganiser.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String description;
@@ -17,7 +18,12 @@ public class Task {
     private LocalDateTime startedOn;
     private LocalDateTime endedOn;
 
-    public Task() {}
+    @OneToMany
+    @JoinColumn(name = "task_id")
+    private List<Comment> comments;
+
+    public Task() {
+    }
 
     public Task(String title, String description) {
         this.title = title;
@@ -72,6 +78,14 @@ public class Task {
 
     public LocalDateTime getEndedOn() {
         return endedOn;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
